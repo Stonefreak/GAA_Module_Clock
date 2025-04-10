@@ -1,86 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <title>Circle with Red Slice</title>
-  <style>
-    body {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      background-color: #f0f0f0;
-      font-family: sans-serif;
-    }
+    <meta charset="UTF-8">
+    <title>Circle with Red Slice</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            font-family: sans-serif;
+        }
 
-    canvas {
-      border: 1px solid #ccc;
-      margin-bottom: 20px;
-      background-color: transparent;
-    }
+        canvas {
+            border: 1px solid #ccc;
+            margin-bottom: 20px;
+            background-color: transparent;
+        }
 
-    input[type="range"] {
-      width: 300px;
-    }
-  </style>
+        input[type="range"] {
+            width: 300px;
+        }
+    </style>
 </head>
-    <body>
-      <label id="title">Some Text</label>
+
+<body>
+    <label id="title">Some Text</label>
     <canvas id="circleCanvas" width="100" height="100"></canvas>
-    
+
     <script>
         const canvas = document.getElementById('circleCanvas');
         const ctx = canvas.getContext('2d');
         const titleLbl = document.getElementById('title');
 
         function drawCircle(sliceAngleDeg) {
-        const centerX = canvas.width / 2;
-        const centerY = canvas.height / 2;
-        const radius = 45;
+            const centerX = canvas.width / 2;
+            const centerY = canvas.height / 2;
+            const radius = 45;
 
-        // Clear the canvas
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
+            // Clear the canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-        // Convert degrees to radians
-        const sliceAngleRad = (sliceAngleDeg - 90) * Math.PI / 180;
-        const ninetyRad = (-90) * Math.PI / 180;
+            // Convert degrees to radians
+            const sliceAngleRad = (sliceAngleDeg - 90) * Math.PI / 180;
+            const ninetyRad = (-90) * Math.PI / 180;
 
-        // Draw the red slice
-        ctx.beginPath();
-        ctx.moveTo(centerX, centerY);
-        ctx.arc(centerX, centerY, radius, ninetyRad, sliceAngleRad);
-        ctx.closePath();
-        ctx.fillStyle = '#f73434';
-        ctx.fill();
+            // Draw the red slice
+            ctx.beginPath();
+            ctx.moveTo(centerX, centerY);
+            ctx.arc(centerX, centerY, radius, ninetyRad, sliceAngleRad);
+            ctx.closePath();
+            ctx.fillStyle = '#f73434';
+            ctx.fill();
 
-        // Draw the rest of the white circle
-        ctx.beginPath();
-        ctx.moveTo(centerX, centerY);
-        ctx.arc(centerX, centerY, radius, sliceAngleRad, 2 * Math.PI + ninetyRad);
-        ctx.closePath();
-        ctx.fillStyle = '#96d62f';
-        ctx.fill();
+            // Draw the rest of the white circle
+            ctx.beginPath();
+            ctx.moveTo(centerX, centerY);
+            ctx.arc(centerX, centerY, radius, sliceAngleRad, 2 * Math.PI + ninetyRad);
+            ctx.closePath();
+            ctx.fillStyle = '#96d62f';
+            ctx.fill();
 
-        // Optional: draw circle outline
-        ctx.beginPath();
-        ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI);
-        ctx.strokeStyle = '#000000';
-        ctx.stroke();
+            // Optional: draw circle outline
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI);
+            ctx.strokeStyle = '#000000';
+            ctx.stroke();
         }
 
         const startDate = new Date("2025-03-10");
-        const endDate = new Date("2025-09-01");
+        const endDate = new Date("2025-08-22");
         const todayDate = new Date();
         const start = ((todayDate - startDate) / (endDate - startDate))
 
-        const daysLeft = Math.floor((endDate - startDate) / 60 / 60 / 24)
-        titleLbl.content = daysLeft + ' days left!'
+        const daysLeft = Math.floor((endDate - todayDate) / 1000 / 60 / 60 / 24)
+        titleLbl.textContent = daysLeft + ' days left!'
         console.log(daysLeft)
-      
+
         // Initial draw
         drawCircle(360 * start);
 
     </script>
-    </body>
+</body>
+
 </html>
