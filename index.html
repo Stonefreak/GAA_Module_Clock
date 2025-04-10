@@ -74,8 +74,9 @@
         const todayDate = new Date();
         const start = ((todayDate - startDate) / (endDate - startDate))
 
-        const daysLeft = Math.Round((endDate - startDate).getDays() * start)
+        const daysLeft = Mathf.Floor((endDate - startDate) / 60 / 60 / 24)
         titleLbl.content = daysLeft + ' days left!'
+        console.log(daysLeft)
       
         // Initial draw
         drawCircle(360 * start);
