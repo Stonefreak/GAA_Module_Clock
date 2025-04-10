@@ -26,11 +26,13 @@
   </style>
 </head>
     <body>
+      <label id="title">Some Text</label>
     <canvas id="circleCanvas" width="100" height="100"></canvas>
     
     <script>
         const canvas = document.getElementById('circleCanvas');
         const ctx = canvas.getContext('2d');
+        const titleLbl = canvas.getContext('title');
 
         function drawCircle(sliceAngleDeg) {
         const centerX = canvas.width / 2;
@@ -72,6 +74,9 @@
         const todayDate = new Date();
         const start = ((todayDate - startDate) / (endDate - startDate))
 
+        const daysLeft = Math.Round((endDate - startDate).getDays() * start)
+        titleLbl.content = daysLeft + ' days left!'
+      
         // Initial draw
         drawCircle(360 * start);
 
