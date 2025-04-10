@@ -17,24 +17,23 @@
 
         canvas {
             border: 1px solid #ccc;
-            margin-bottom: 20px;
             background-color: transparent;
         }
 
-        input[type="range"] {
-            width: 300px;
+        label{
+            font-size: 12px;
         }
     </style>
 </head>
 
 <body>
-    <label id="title" font-size="5px">Some Text</label>
+    <label id="title">Some Text</label>
     <canvas id="circleCanvas" width="100" height="100"></canvas>
 
     <script>
+        const titleLbl = document.getElementById('title');
         const canvas = document.getElementById('circleCanvas');
         const ctx = canvas.getContext('2d');
-        const titleLbl = document.getElementById('title');
 
         function drawCircle(sliceAngleDeg) {
             const centerX = canvas.width / 2;
