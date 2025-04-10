@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Circle with Red Slice</title>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background-color: #f0f0f0;
+      font-family: sans-serif;
+    }
+
+    canvas {
+      border: 1px solid #ccc;
+      margin-bottom: 20px;
+      background-color: transparent;
+    }
+
+    input[type="range"] {
+      width: 300px;
+    }
+  </style>
+</head>
+    <body>
+    <canvas id="circleCanvas" width="300" height="300"></canvas>
+    <label>
+        Red Slice (degrees): 
+        <input type="range" id="sliceRange" min="0" max="360" value="60">
+        <span id="degreeValue">60</span>°
+    </label>
+
+    <script>
+        const canvas = document.getElementById('circleCanvas');
+        const ctx = canvas.getContext('2d');
+        const sliceRange = document.getElementById('sliceRange');
+        const degreeValue = document.getElementById('degreeValue');
+
+        function drawCircle(sliceAngleDeg) {
+        const centerX = canvas.width / 2;
+        const centerY = canvas.height / 2;
+        const radius = 100;
+
+        // Clear the canvas
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // Convert degrees to radians
+        const sliceAngleRad = (sliceAngleDeg - 90) * Math.PI / 180;
+        const ninetyRad = (-90) * Math.PI / 180;
+
+        // Draw the red slice
+        ctx.beginPath();
+        ctx.moveTo(centerX, centerY);
+        ctx.arc(centerX, centerY, radius, ninetyRad, sliceAngleRad);
+        ctx.closePath();
+        ctx.fillStyle = '#f73434';
+        ctx.fill();
+
+        // Draw the rest of the white circle
+        ctx.beginPath();
+        ctx.moveTo(centerX, centerY);
+        ctx.arc(centerX, centerY, radius, sliceAngleRad, 2 * Math.PI + ninetyRad);
+        ctx.closePath();
+        ctx.fillStyle = '#96d62f';
+        ctx.fill();
+
+        // Optional: draw circle outline
+        ctx.beginPath();
+        ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI);
+        ctx.strokeStyle = '#000000';
+        ctx.stroke();
+        }
+
+        const startDate = new Date("2025-03-10");
+        const endDate = new Date("2025-09-01");
+        const todayDate = new Date();
+        const start = ((todayDate - startDate) / (endDate - startDate))
+
+        console.log(startDate);
+        console.log(endDate);
+        console.log(todayDate);
+        console.log(start);
+
+        // Initial draw
+        drawCircle(360 * start);
+
+    </script>
+    </body>
+</html>
